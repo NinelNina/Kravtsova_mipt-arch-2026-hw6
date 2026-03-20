@@ -13,16 +13,16 @@ def get_user_amount() -> Optional[float]:
         amount = float(user_input)
 
         if amount < 0:
-            logger.error("Сумма не может быть отрицательной")
+            logger.error("Amount can't be below zero")
             return None
 
         return amount
 
     except ValueError:
-        logger.error(f"Неверный формат числа: '{user_input}'")
+        logger.error(f"Unexpected number format: '{user_input}'")
         return None
     except KeyboardInterrupt:
-        logger.info("Операция отменена пользователем")
+        logger.info("Operation cancelled by user")
         return None
 
 
@@ -35,19 +35,19 @@ def convert_and_display(amount: float, currency: str) -> bool:
             print(f"{amount:.2f} {BASE_CURRENCY} = {result:.2f} {currency}")
             return True
         else:
-            logger.warning(f"Не удалось конвертировать в {currency}")
+            logger.warning(f"Failed convert to {currency}")
             return False
 
     except ValueError as e:
-        logger.error(f"Ошибка: {e}")
+        logger.error(f"Error: {e}")
         return False
     except Exception as e:
-        logger.error(f"Непредвиденная ошибка: {type(e).__name__}: {e}")
+        logger.error(f"Unexpected error: {type(e).__name__}: {e}")
         return False
 
 
 def main() -> int:
-    logger.info("Запуск конвертера валют")
+    logger.info("Starting currency converter")
 
     amount = get_user_amount()
     if amount is None:
@@ -63,7 +63,7 @@ def main() -> int:
             success_count += 1
 
     print("-" * 40)
-    logger.info(f"Завершено: {success_count}/{len(SUPPORTED_CURRENCIES)} успешных конвертаций")
+    logger.info(f"Completed: {success_count}/{len(SUPPORTED_CURRENCIES)} successful conversions")
 
     return 0 if success_count > 0 else 1
 
