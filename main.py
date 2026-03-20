@@ -1,7 +1,7 @@
 from typing import Optional
 from config import SUPPORTED_CURRENCIES, BASE_CURRENCY
 from utils.logger import setup_logger
-from converters import ConverterFactory
+from converters import ConverterBuilder
 
 
 logger = setup_logger(__name__)
@@ -28,7 +28,7 @@ def get_user_amount() -> Optional[float]:
 
 def convert_and_display(amount: float, currency: str) -> bool:
     try:
-        converter = ConverterFactory.create(currency)
+        converter = ConverterBuilder.build(currency)
         result = converter.convert(amount)
 
         if result is not None:
