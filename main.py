@@ -12,8 +12,8 @@ def get_user_amount() -> Optional[float]:
         user_input = input(f"Введите сумму в {BASE_CURRENCY}: ").strip()
         amount = float(user_input)
 
-        if amount < 0:
-            logger.error("Amount can't be below zero")
+        if amount <= 0:
+            logger.error("The amount cannot be less than or equal to zero")
             return None
 
         return amount
